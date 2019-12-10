@@ -8,28 +8,39 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   squares: string[];
-  nextPlayer: string;
-  winner: string;
+  status: string;
+  currentPlayer: string;
 
   constructor() {
     this.squares = Array(9).fill(null);
-    this.nextPlayer = this.getNextPlayer();
-    this.winner = null;
+    this.status = this.getStatus();
+    this.currentPlayer = this.getNextPlayer();
   }
 
   markSquare(squareIndex: number) {
-    if (this.squares[squareIndex] != null || this.getWinner() != null)
+    if (this.squares[squareIndex] != null || this.getWinner() != null) {
       return;
+    }
 
-    this.squares[squareIndex] = this.nextPlayer;
+    this.squares[squareIndex] = this.currentPlayer;
 
-    this.nextPlayer = this.getNextPlayer();
+    this.status = this.getStatus();
 
-    this.winner = this.getWinner();
+    this.currentPlayer = this.getNextPlayer();
+  }
+
+  private getStatus(): string {
+    const winner: string = this.getWinner();
+
+    if (winner != null) {
+      return winner;
+    } else {
+      return 'Next Player: ' + this.getNextPlayer();
+    }
   }
 
   private getNextPlayer(): string {
-    return this.nextPlayer === "X" ? "O" : "X";
+    return this.currentPlayer === 'X' ? 'O' : 'X';
   }
 
   private getWinner(): string {
@@ -43,10 +54,10 @@ export class AppComponent {
       [0, 4, 8],
       [2, 4, 6]
     ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
+    for (const line of lines) {
+      const [a, b, c] = line;
       if (this.squares[a] != null && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c]) {
-        return "Winner: " + this.squares[a];
+        return 'Winner: ' + this.squares[a];
       }
     }
     return null;
