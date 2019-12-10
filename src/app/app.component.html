@@ -2,23 +2,23 @@
   <div class="game-board">
     <div>
       <div class="board-row">
-        <button class="square"></button>
-        <button class="square"></button>
-        <button class="square"></button>
+        <button class="square" (click)="markSquare(0)">{{ squares[0] }}</button>
+        <button class="square" (click)="markSquare(1)">{{ squares[1] }}</button>
+        <button class="square" (click)="markSquare(2)">{{ squares[2] }}</button>
       </div>
       <div class="board-row">
-        <button class="square"></button>
-        <button class="square"></button>
-        <button class="square"></button>
+        <button class="square" (click)="markSquare(3)">{{ squares[3] }}</button>
+        <button class="square" (click)="markSquare(4)">{{ squares[4] }}</button>
+        <button class="square" (click)="markSquare(5)">{{ squares[5] }}</button>
       </div>
       <div class="board-row">
-        <button class="square"></button>
-        <button class="square"></button>
-        <button class="square"></button>
+        <button class="square" (click)="markSquare(6)">{{ squares[6] }}</button>
+        <button class="square" (click)="markSquare(7)">{{ squares[7] }}</button>
+        <button class="square" (click)="markSquare(8)">{{ squares[8] }}</button>
       </div>
     </div>
   </div>
   <div class="game-info">
-    <div>status</div>
+    <div>{{ winner }}</div>
   </div>
 </div>
