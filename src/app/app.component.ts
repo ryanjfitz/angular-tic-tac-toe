@@ -33,7 +33,7 @@ export class AppComponent {
     const winner: string = this.getWinner();
 
     if (winner != null) {
-      return winner;
+      return 'Winner: ' + winner;
     } else {
       return 'Next Player: ' + this.getNextPlayer();
     }
@@ -57,7 +57,7 @@ export class AppComponent {
     for (const line of lines) {
       const [a, b, c] = line;
       if (this.squares[a] != null && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c]) {
-        return 'Winner: ' + this.squares[a];
+        return this.squares[a];
       }
     }
     return null;
