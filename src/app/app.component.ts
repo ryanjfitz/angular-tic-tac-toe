@@ -8,11 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   squares: string[];
+  history: string[][];
   status: string;
   currentPlayer: string;
 
   constructor() {
     this.squares = Array(9).fill(null);
+    this.history = [this.squares.slice()];
     this.status = this.getStatus();
     this.currentPlayer = this.getNextPlayer();
   }
@@ -24,9 +26,15 @@ export class AppComponent {
 
     this.squares[squareIndex] = this.currentPlayer;
 
+    this.history.push(this.squares.slice());
+
     this.status = this.getStatus();
 
     this.currentPlayer = this.getNextPlayer();
+  }
+
+  goToMove(moveIndex: number) {
+    this.squares = this.history[moveIndex];
   }
 
   private getStatus(): string {
