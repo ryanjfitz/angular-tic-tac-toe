@@ -26,11 +26,11 @@ export class AppComponent {
       return;
     }
 
-    this.squares[squareIndex] = this.currentPlayer;
-
-    this.history = this.history.slice(0, this.currentMoveIndex + 1);
+    this.history = this.history.slice(0, this.currentMoveIndex + 1).map(boardSnapshot => boardSnapshot.slice());
 
     this.currentMoveIndex += 1;
+
+    this.squares[squareIndex] = this.currentPlayer;
 
     this.history.push(this.squares.slice());
 
