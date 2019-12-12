@@ -11,12 +11,14 @@ export class AppComponent {
   history: string[][];
   status: string;
   currentPlayer: string;
+  currentMoveIndex: number;
 
   constructor() {
     this.squares = Array(9).fill(null);
     this.history = [this.squares.slice()];
     this.status = this.getStatus();
     this.currentPlayer = this.getNextPlayer();
+    this.currentMoveIndex = 0;
   }
 
   markSquare(squareIndex: number) {
@@ -25,6 +27,10 @@ export class AppComponent {
     }
 
     this.squares[squareIndex] = this.currentPlayer;
+
+    this.history = this.history.slice(0, this.currentMoveIndex + 1);
+
+    this.currentMoveIndex += 1;
 
     this.history.push(this.squares.slice());
 
@@ -35,6 +41,8 @@ export class AppComponent {
 
   goToMove(moveIndex: number) {
     this.squares = this.history[moveIndex];
+
+    this.currentMoveIndex = moveIndex;
   }
 
   private getStatus(): string {
