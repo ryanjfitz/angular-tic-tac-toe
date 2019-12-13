@@ -8,14 +8,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   squares: string[];
-  history: string[][];
+  history: History;
   status: string;
   currentPlayer: string;
   currentMoveIndex: number;
 
   constructor() {
     this.squares = Array(9).fill(null);
-    this.history = [this.squares.slice()];
+    this.history = new History();
+    this.history.addSnapshot(this.squares);
     this.status = this.getStatus();
     this.currentPlayer = this.getNextPlayer();
     this.currentMoveIndex = 0;
@@ -26,13 +27,13 @@ export class AppComponent {
       return;
     }
 
-    this.history = this.history.slice(0, this.currentMoveIndex + 1).map(boardSnapshot => boardSnapshot.slice());
+    this.history.truncateToSnapshot(this.currentMoveIndex);
 
     this.currentMoveIndex += 1;
 
     this.squares[squareIndex] = this.currentPlayer;
 
-    this.history.push(this.squares.slice());
+    this.history.addSnapshot(this.squares.slice());
 
     this.status = this.getStatus();
 
@@ -40,13 +41,13 @@ export class AppComponent {
   }
 
   goToMove(moveIndex: number) {
-    this.squares = this.history[moveIndex];
+    this.squares = this.history.getSnapshot(moveIndex);
 
     this.currentMoveIndex = moveIndex;
   }
 
   private getStatus(): string {
-    const winner: string = this.getWinner();
+    const winner: string | null = this.getWinner();
 
     if (winner != null) {
       return 'Winner: ' + winner;
@@ -59,7 +60,7 @@ export class AppComponent {
     return this.currentPlayer === 'X' ? 'O' : 'X';
   }
 
-  private getWinner(): string {
+  private getWinner(): string | null {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -77,6 +78,28 @@ export class AppComponent {
       }
     }
     return null;
+  }
+
+}
+
+class History {
+
+  snapshots: string[][];
+
+  constructor() {
+    this.snapshots = [];
+  }
+
+  addSnapshot(snapshot: string[]) {
+    this.snapshots.push(snapshot);
+  }
+
+  getSnapshot(snapshotIndex: number): string[] {
+    return this.snapshots[snapshotIndex];
+  }
+
+  truncateToSnapshot(snapshotIndex: number) {
+    this.snapshots = this.snapshots.slice(0, snapshotIndex + 1).map(snapshot => snapshot.slice());
   }
 
 }

@@ -21,7 +21,7 @@
   <div class="game-info">
     <div>{{ status }}</div>
     <ol>
-      <li *ngFor="let boardSnapshot of history; let i = index">
+      <li *ngFor="let snapshot of history.snapshots; let i = index">
         <button (click)="goToMove(i)">
           {{i === 0 ? 'Go to game start' : 'Go to move #' + i}}
         </button>
