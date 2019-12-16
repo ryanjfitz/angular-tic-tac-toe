@@ -1,7 +1,7 @@
 export class Game {
 
     currentPlayer: string;
-    squares: string[];
+    squares: (string | null)[];
     winner: string | null;
     status: string;
 

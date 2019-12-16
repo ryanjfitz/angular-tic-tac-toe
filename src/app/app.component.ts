@@ -10,7 +10,7 @@ export class AppComponent {
 
   game: Game;
 
-  get squares(): string[] {
+  get squares(): (string | null)[] {
     return this.game.squares;
   }
 

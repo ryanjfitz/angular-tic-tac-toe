@@ -5,15 +5,7 @@ describe('Game', () => {
         const game = new Game();
 
         expect(game.currentPlayer).toBe('X');
-        expect(game.squares[0]).toBeNull();
-        expect(game.squares[1]).toBeNull();
-        expect(game.squares[2]).toBeNull();
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual([null, null, null, null, null, null, null, null, null]);
         expect(game.winner).toBeNull();
         expect(game.status).toBe('X\'s turn.');
     });
@@ -24,15 +16,7 @@ describe('Game', () => {
         game.markSquare(0);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBeNull();
-        expect(game.squares[2]).toBeNull();
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
         expect(game.winner).toBeNull();
     });
 
@@ -43,15 +27,7 @@ describe('Game', () => {
         game.markSquare(1);
 
         expect(game.currentPlayer).toBe('X');
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBe('O');
-        expect(game.squares[2]).toBeNull();
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['X', 'O', null, null, null, null, null, null, null]);
         expect(game.winner).toBeNull();
     });
 
@@ -62,15 +38,7 @@ describe('Game', () => {
         game.markSquare(0);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBeNull();
-        expect(game.squares[2]).toBeNull();
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
         expect(game.winner).toBeNull();
     });
 
@@ -84,15 +52,7 @@ describe('Game', () => {
         game.markSquare(2);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBe('X');
-        expect(game.squares[2]).toBe('X');
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBe('O');
-        expect(game.squares[7]).toBe('O');
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['X', 'X', 'X', null, null, null, 'O', 'O', null]);
         expect(game.winner).toBe('X');
     });
 
@@ -106,15 +66,7 @@ describe('Game', () => {
         game.markSquare(5);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBeNull();
-        expect(game.squares[1]).toBeNull();
-        expect(game.squares[2]).toBeNull();
-        expect(game.squares[3]).toBe('X');
-        expect(game.squares[4]).toBe('X');
-        expect(game.squares[5]).toBe('X');
-        expect(game.squares[6]).toBe('O');
-        expect(game.squares[7]).toBe('O');
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual([null, null, null, 'X', 'X', 'X', 'O', 'O', null]);
         expect(game.winner).toBe('X');
     });
 
@@ -128,15 +80,7 @@ describe('Game', () => {
         game.markSquare(8);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('O');
-        expect(game.squares[1]).toBe('O');
-        expect(game.squares[2]).toBeNull();
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBe('X');
-        expect(game.squares[7]).toBe('X');
-        expect(game.squares[8]).toBe('X');
+        expect(game.squares).toEqual(['O', 'O', null, null, null, null, 'X', 'X', 'X']);
         expect(game.winner).toBe('X');
     });
 
@@ -150,15 +94,7 @@ describe('Game', () => {
         game.markSquare(6);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBe('O');
-        expect(game.squares[2]).toBe('O');
-        expect(game.squares[3]).toBe('X');
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBe('X');
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['X', 'O', 'O', 'X', null, null, 'X', null, null]);
         expect(game.winner).toBe('X');
     });
 
@@ -172,15 +108,7 @@ describe('Game', () => {
         game.markSquare(7);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBeNull();
-        expect(game.squares[1]).toBe('X');
-        expect(game.squares[2]).toBe('O');
-        expect(game.squares[3]).toBe('O');
-        expect(game.squares[4]).toBe('X');
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBe('X');
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual([null, 'X', 'O', 'O', 'X', null, null, 'X', null]);
         expect(game.winner).toBe('X');
     });
 
@@ -194,15 +122,7 @@ describe('Game', () => {
         game.markSquare(8);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBeNull();
-        expect(game.squares[1]).toBe('O');
-        expect(game.squares[2]).toBe('X');
-        expect(game.squares[3]).toBe('O');
-        expect(game.squares[4]).toBeNull();
-        expect(game.squares[5]).toBe('X');
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBe('X');
+        expect(game.squares).toEqual([null, 'O', 'X', 'O', null, 'X', null, null, 'X']);
         expect(game.winner).toBe('X');
     });
 
@@ -216,15 +136,7 @@ describe('Game', () => {
         game.markSquare(8);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBe('O');
-        expect(game.squares[2]).toBe('O');
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBe('X');
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBe('X');
+        expect(game.squares).toEqual(['X', 'O', 'O', null, 'X', null, null, null, 'X']);
         expect(game.winner).toBe('X');
     });
 
@@ -238,15 +150,7 @@ describe('Game', () => {
         game.markSquare(6);
 
         expect(game.currentPlayer).toBe('O');
-        expect(game.squares[0]).toBe('O');
-        expect(game.squares[1]).toBe('O');
-        expect(game.squares[2]).toBe('X');
-        expect(game.squares[3]).toBeNull();
-        expect(game.squares[4]).toBe('X');
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBe('X');
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['O', 'O', 'X', null, 'X', null, 'X', null, null]);
         expect(game.winner).toBe('X');
     });
 
@@ -279,15 +183,7 @@ describe('Game', () => {
 
         game.markSquare(5);
 
-        expect(game.squares[0]).toBe('X');
-        expect(game.squares[1]).toBe('X');
-        expect(game.squares[2]).toBe('X');
-        expect(game.squares[3]).toBe('O');
-        expect(game.squares[4]).toBe('O');
-        expect(game.squares[5]).toBeNull();
-        expect(game.squares[6]).toBeNull();
-        expect(game.squares[7]).toBeNull();
-        expect(game.squares[8]).toBeNull();
+        expect(game.squares).toEqual(['X', 'X', 'X', 'O', 'O', null, null, null, null]);
         expect(game.winner).toBe('X');
     });
 
