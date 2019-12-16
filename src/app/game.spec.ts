@@ -203,4 +203,30 @@ describe('Game', () => {
         expect(game.winner).toBe('Draw');
         expect(game.status).toBe('Winner: Draw');
     });
+
+    it('should handle history', () => {
+        const game = new Game();
+
+        game.markSquare(0);
+        game.markSquare(1);
+        game.markSquare(2);
+        expect(game.squares).toEqual(['X', 'O', 'X', null, null, null, null, null, null]);
+
+        game.goToMove(0);
+        expect(game.squares).toEqual([null, null, null, null, null, null, null, null, null]);
+        expect(game.currentPlayer).toBe('X');
+        expect(game.status).toBe('X\'s turn.');
+        game.goToMove(1);
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
+        expect(game.currentPlayer).toBe('O');
+        expect(game.status).toBe('O\'s turn.');
+        game.goToMove(2);
+        expect(game.squares).toEqual(['X', 'O', null, null, null, null, null, null, null]);
+        expect(game.currentPlayer).toBe('X');
+        expect(game.status).toBe('X\'s turn.');
+        game.goToMove(3);
+        expect(game.squares).toEqual(['X', 'O', 'X', null, null, null, null, null, null]);
+        expect(game.currentPlayer).toBe('O');
+        expect(game.status).toBe('O\'s turn.');
+    });
 });

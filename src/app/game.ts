@@ -1,15 +1,22 @@
+interface Snapshot {
+    squares: (string | null)[];
+    currentPlayer: string;
+}
+
 export class Game {
 
     currentPlayer: string;
     squares: (string | null)[];
     winner: string | null;
     status: string;
+    history: Snapshot[];
 
     constructor() {
         this.currentPlayer = 'X';
         this.squares = Array(9).fill(null);
         this.winner = null;
         this.status = this.getStatus();
+        this.history = [{ squares: this.squares.slice(), currentPlayer: this.currentPlayer }];
     }
 
     markSquare(squareIndex: number) {
@@ -20,6 +27,13 @@ export class Game {
         this.squares[squareIndex] = this.currentPlayer;
         this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
         this.winner = this.getWinner();
+        this.status = this.getStatus();
+        this.history.push({ squares: this.squares.slice(), currentPlayer: this.currentPlayer });
+    }
+
+    goToMove(moveIndex: number) {
+        this.squares = this.history[moveIndex].squares;
+        this.currentPlayer = this.history[moveIndex].currentPlayer;
         this.status = this.getStatus();
     }
 

@@ -18,12 +18,20 @@ export class AppComponent {
     return this.game.status;
   }
 
+  get history() {
+    return this.game.history;
+  }
+
   constructor() {
     this.game = new Game();
   }
 
   markSquare(squareIndex: number) {
     this.game.markSquare(squareIndex);
+  }
+
+  goToMove(moveIndex: number) {
+    this.game.goToMove(moveIndex);
   }
 
 }
