@@ -51,6 +51,10 @@ export class Game {
             }
         }
 
+        if (this.squares.every(square => square !== null)) {
+            return 'Draw';
+        }
+
         return null;
     }
 }

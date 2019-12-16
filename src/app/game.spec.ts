@@ -291,4 +291,21 @@ describe('Game', () => {
         expect(game.squares[8]).toBeNull();
         expect(game.winner).toBe('X');
     });
+
+    it('should handle draw', () => {
+        const game = new Game();
+
+        game.markSquare(0);
+        game.markSquare(3);
+        game.markSquare(6);
+        game.markSquare(2);
+        game.markSquare(5);
+        game.markSquare(8);
+        game.markSquare(1);
+        game.markSquare(4);
+        game.markSquare(7);
+
+        expect(game.winner).toBe('Draw');
+        expect(game.status).toBe('Winner: Draw');
+    });
 });
