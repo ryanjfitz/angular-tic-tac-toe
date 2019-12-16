@@ -1,5 +1,4 @@
 import { Game } from './game';
-import { truncate } from 'fs';
 
 describe('Game', () => {
     it('should initialize state correctly', () => {
