@@ -10,6 +10,7 @@ export class Game {
     winner: string | null;
     status: string;
     history: Snapshot[];
+    currentMoveIndex: number;
 
     constructor() {
         this.currentPlayer = 'X';
@@ -17,6 +18,7 @@ export class Game {
         this.winner = null;
         this.status = this.getStatus();
         this.history = [{ squares: this.squares.slice(), currentPlayer: this.currentPlayer }];
+        this.currentMoveIndex = 0;
     }
 
     markSquare(squareIndex: number) {
@@ -28,13 +30,22 @@ export class Game {
         this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
         this.winner = this.getWinner();
         this.status = this.getStatus();
+        this.history = this.history.slice(0, this.currentMoveIndex + 1);
         this.history.push({ squares: this.squares.slice(), currentPlayer: this.currentPlayer });
+        this.currentMoveIndex += 1;
     }
 
     goToMove(moveIndex: number) {
-        this.squares = this.history[moveIndex].squares;
-        this.currentPlayer = this.history[moveIndex].currentPlayer;
+        const snapshot = this.history[moveIndex];
+
+        if (snapshot == null) {
+            return;
+        }
+
+        this.squares = snapshot.squares.slice();
+        this.currentPlayer = snapshot.currentPlayer;
         this.status = this.getStatus();
+        this.currentMoveIndex = moveIndex;
     }
 
     private getStatus(): string {

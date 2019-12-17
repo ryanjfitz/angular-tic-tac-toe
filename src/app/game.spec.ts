@@ -204,7 +204,7 @@ describe('Game', () => {
         expect(game.status).toBe('Winner: Draw');
     });
 
-    it('should handle history', () => {
+    it('should handle history 1', () => {
         const game = new Game();
 
         game.markSquare(0);
@@ -228,5 +228,42 @@ describe('Game', () => {
         expect(game.squares).toEqual(['X', 'O', 'X', null, null, null, null, null, null]);
         expect(game.currentPlayer).toBe('O');
         expect(game.status).toBe('O\'s turn.');
+    });
+
+    it('should handle history 2', () => {
+        const game = new Game();
+
+        game.markSquare(0);
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
+        game.goToMove(0);
+        expect(game.squares).toEqual([null, null, null, null, null, null, null, null, null]);
+
+        game.markSquare(0);
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
+        game.goToMove(0);
+        expect(game.squares).toEqual([null, null, null, null, null, null, null, null, null]);
+    });
+
+    it('should delete future moves from history after making move', () => {
+        const game = new Game();
+
+        // Make 3 moves.
+        game.markSquare(0);
+        game.markSquare(1);
+        game.markSquare(2);
+        expect(game.squares).toEqual(['X', 'O', 'X', null, null, null, null, null, null]);
+
+        // Go to game start.
+        game.goToMove(0);
+
+        // Re-make first move.
+        game.markSquare(0);
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
+
+        // Ensure 2nd and 3rd moves were erased.
+        game.goToMove(2);
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
+        game.goToMove(3);
+        expect(game.squares).toEqual(['X', null, null, null, null, null, null, null, null]);
     });
 });
