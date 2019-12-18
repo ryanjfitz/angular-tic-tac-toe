@@ -18,8 +18,8 @@ export class AppComponent {
     return this.game.status;
   }
 
-  get history() {
-    return this.game.history;
+  get moves(): number[] {
+    return Array.from(Array(this.game.history.length).keys());
   }
 
   constructor() {
