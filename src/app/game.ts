@@ -8,15 +8,17 @@ export class Game {
     currentPlayer: string;
     squares: (string | null)[];
     winner: string | null;
-    status: string;
     history: Snapshot[];
     currentMoveIndex: number;
+
+    get status(): string {
+        return this.winner !== null ? 'Winner: ' + this.winner : this.currentPlayer + '\'s turn.';
+    }
 
     constructor() {
         this.currentPlayer = 'X';
         this.squares = Array(9).fill(null);
         this.winner = null;
-        this.status = this.getStatus();
         this.history = [{ squares: this.squares.slice(), currentPlayer: this.currentPlayer }];
         this.currentMoveIndex = 0;
     }
@@ -29,7 +31,6 @@ export class Game {
         this.squares[squareIndex] = this.currentPlayer;
         this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
         this.winner = this.getWinner();
-        this.status = this.getStatus();
         this.history = this.history.slice(0, this.currentMoveIndex + 1);
         this.history.push({ squares: this.squares.slice(), currentPlayer: this.currentPlayer });
         this.currentMoveIndex += 1;
@@ -44,12 +45,7 @@ export class Game {
 
         this.squares = snapshot.squares.slice();
         this.currentPlayer = snapshot.currentPlayer;
-        this.status = this.getStatus();
         this.currentMoveIndex = moveIndex;
-    }
-
-    private getStatus(): string {
-        return this.winner !== null ? 'Winner: ' + this.winner : this.currentPlayer + '\'s turn.';
     }
 
     private getWinner(): string | null {
